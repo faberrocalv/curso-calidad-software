@@ -32,7 +32,7 @@
 
 ## CP4: Verificar adición y modificación de cantidad desde PLP y su reflejo en checkout
 
-*Given* el usuario está en el PLP de "tecnologia/computadores"
+*Given* el usuario está en el PLP
 
 *When* agrega el producto "Portatil HP AMD Ryzen 7 7730U RAM 16 GB 1 TB SSD 15fc0030la" al carrito
 
@@ -44,15 +44,14 @@
 
 ## CP5: Verificar persistencia de producto agregado desde PDP y su reflejo en checkout
 
-*Given* el usuario está en el PDP del producto "Televisor SAMSUNG 60 pulgadas LED Uhd4K Smart TV UN60DU7000KXZL"
+*Given* el usuario está en el PDP del producto "Consola PS5 Slim de Disco 1 TB Blanca"
 
 *When* agrega el producto al carrito
 *And* refresca la página
 *And* hace clic en "Comprar ahora"
-*And* selecciona la opción sin garantía
 *And* viaja hasta el checkout
 
-*Then* el nombre del producto "Televisor SAMSUNG 60 pulgadas LED Uhd4K Smart TV UN60DU7000KXZL" se visualiza en el orderForm
+*Then* el nombre del producto "Consola PS5 Slim de Disco 1 TB Blanca" se visualiza en el orderForm
 *And* la cantidad del producto "1" se visualiza en el orderForm
 
 ## CP6: Verificar adición de múltiples unidades de dos productos diferentes y su reflejo en checkout
@@ -61,7 +60,7 @@
 
 *When* agrega 1 unidad del producto al carrito
 *And* adiciona 1 unidad más del mismo producto
-*And* navega al PDP del producto "Consola PS5 Slim 1TB Lector de Disco Blanca"
+*And* navega al PDP del producto "PS5 Grand Theft Auto V Latam PLAYSTATION SIN REF"
 *And* agrega 1 unidad de este segundo producto al carrito
 *And* adiciona 1 unidad más de este segundo producto
 *And* viaja al checkout desde el minicart
