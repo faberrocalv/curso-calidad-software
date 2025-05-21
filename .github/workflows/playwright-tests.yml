@@ -9,6 +9,8 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: mcr.microsoft.com/playwright:v1.52.0-jammy
+      env:
+        HOME: /root  # Soluciona el problema con Firefox: "Firefox is unable to launch if the $HOME folder isn't owned by the current user"
     
     strategy:
       fail-fast: false  # No detener todos los trabajos si uno falla
