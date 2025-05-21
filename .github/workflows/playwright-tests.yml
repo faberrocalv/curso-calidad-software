@@ -18,5 +18,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       
+      # Necesitamos instalar las dependencias locales del proyecto
+      - name: Install dependencies
+        run: npm ci
+      
+      # Asegurar que las dependencias están correctamente instaladas
+      - name: Verify Playwright installation
+        run: npx playwright --version
+      
       - name: Ejecutar test ${{ matrix.testcase }} en modo headless
         run: npx playwright test tests/ejercicio_practico.spec.ts -g "${{ matrix.testcase }}"
