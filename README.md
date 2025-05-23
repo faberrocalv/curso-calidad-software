@@ -49,6 +49,8 @@ Asegúrate de tener instalado lo siguiente:
 *   `package.json`: Define las dependencias del proyecto y los scripts de npm.
 *   `playwright-report/`: Directorio donde se generan los reportes HTML de las ejecuciones de pruebas.
 *   `test-results/`: Directorio donde Playwright guarda los resultados de las pruebas, como trazas y capturas de pantalla en caso de fallo.
+*   `.github/workflows/`: Contiene los archivos de configuración para GitHub Actions.
+    *   `playwright-tests.yml`: Configuración del pipeline de CI para pruebas de Playwright.
 
 ## Ejecución de Pruebas
 
@@ -106,14 +108,67 @@ Puedes ejecutar las pruebas de Playwright utilizando los siguientes comandos des
     npx playwright test tests/ejercicio_practico.spec.ts -g "Título del test específico"
     ```
 
+## Ejecución de Pruebas con GitHub Actions
+
+Este proyecto incluye un pipeline de CI configurado en GitHub Actions que permite ejecutar los casos de prueba de manera automatizada. El pipeline está configurado para ejecutar cada caso de prueba en un navegador diferente, siguiendo una estrategia de matriz.
+
+### Configuración del Pipeline
+
+El archivo `playwright-tests.yml` define un workflow que:
+
+- Ejecuta 6 casos de prueba (CP1 a CP6) en diferentes navegadores (chromium, firefox, webkit)
+- Utiliza contenedores Docker con la imagen oficial de Playwright
+- Genera y almacena reportes HTML como artefactos para cada ejecución
+- Se ejecuta de manera manual a través de la interfaz de GitHub
+
+### Cómo Ejecutar el GitHub Action Manualmente
+
+Para ejecutar el pipeline de pruebas de Playwright manualmente:
+
+1. Ve a la pestaña **Actions** en tu repositorio de GitHub.
+
+2. En la lista de workflows del lado izquierdo, selecciona **Playwright Tests**.
+
+3. Haz clic en el botón **Run workflow** que aparece a la derecha.
+
+4. En el diálogo emergente:
+   - Asegúrate de seleccionar la rama correcta desde donde quieres ejecutar las pruebas (debe ser la rama por defecto para poder realizar la ejecución manual)
+   - Haz clic en el botón **Run workflow** para iniciar la ejecución
+
+5. Una vez iniciado, podrás ver en tiempo real el progreso de la ejecución:
+   - Se crearán 6 jobs independientes, uno para cada combinación de caso de prueba y navegador
+   - Puedes hacer clic en cada job para ver los detalles de su ejecución
+   - Cada job incluye pasos para checkout del código, instalación de dependencias, ejecución del test y guardado del reporte
+
+6. Cuando la ejecución haya finalizado (exitosamente o con errores), podrás descargar los reportes HTML:
+   - Ve a la página del workflow que acabas de ejecutar
+   - En la parte inferior, encontrarás una sección llamada **Artifacts**
+   - Cada artefacto estará nombrado como `playwright-report-CP{número}-{navegador}`
+   - Haz clic en cualquiera de ellos para descargar el reporte HTML correspondiente
+
+### Estructura de la Matriz
+
+El pipeline utiliza una estrategia de matriz para distribuir la ejecución de los casos de prueba:
+
+- CP1: WebKit
+- CP2: Firefox
+- CP3: Chromium
+- CP4: WebKit
+- CP5: Firefox
+- CP6: Chromium
+
+Esto permite ejecutar todas las pruebas en paralelo y verificar la compatibilidad con diferentes navegadores al mismo tiempo.
+
 ## Ver Reportes de Pruebas
 
-Después de ejecutar las pruebas, Playwright genera un reporte HTML. Puedes abrirlo con el siguiente comando:
+Después de ejecutar las pruebas localmente, Playwright genera un reporte HTML. Puedes abrirlo con el siguiente comando:
 
 ```bash
 npx playwright show-report
 ```
 Esto abrirá el reporte en tu navegador por defecto, usualmente ubicado en la carpeta `playwright-report/`.
+
+Para los reportes generados por GitHub Actions, puedes descargarlos como artefactos desde la interfaz de GitHub según se describió anteriormente.
 
 ## Debugging
 
