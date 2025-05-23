@@ -5,7 +5,7 @@ on:
 
 jobs:
   test:
-    name: 'Ejecutar caso de prueba: ${{ matrix.testcase }}'
+    name: 'CP${{ matrix.testcase }} en ${{ matrix.browser }}'
     runs-on: ubuntu-latest
     container:
       image: mcr.microsoft.com/playwright:v1.52.0-jammy
@@ -14,7 +14,20 @@ jobs:
     strategy:
       fail-fast: false  # No detener todos los trabajos si uno falla
       matrix:
-        testcase: ['CP1', 'CP2', 'CP3', 'CP4', 'CP5', 'CP6']
+        # Definir la matriz con combinaciones de casos de prueba y navegadores
+        include:
+          - testcase: '1'
+            browser: 'chromium'
+          - testcase: '2'
+            browser: 'firefox'
+          - testcase: '3'
+            browser: 'webkit'
+          - testcase: '4'
+            browser: 'chromium'
+          - testcase: '5'
+            browser: 'firefox'
+          - testcase: '6'
+            browser: 'webkit'
     
     steps:
       - uses: actions/checkout@v4
@@ -27,5 +40,15 @@ jobs:
       - name: Verify Playwright installation
         run: npx playwright --version
       
-      - name: Ejecutar test ${{ matrix.testcase }} en modo headless
-        run: npx playwright test tests/ejercicio_practico.spec.ts -g "${{ matrix.testcase }}"
+      - name: Ejecutar test CP${{ matrix.testcase }} en navegador ${{ matrix.browser }}
+        run: npx playwright test tests/ejercicio_practico.spec.ts -g "CP${{ matrix.testcase }}" --project=${{ matrix.browser }}
+      
+      # Guardar reporte HTML
+      - name: Guardar reporte HTML
+        # Ejecutar este paso incluso si los test fallan
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report-CP${{ matrix.testcase }}-${{ matrix.browser }}
+          path: playwright-report/
+          retention-days: 30
