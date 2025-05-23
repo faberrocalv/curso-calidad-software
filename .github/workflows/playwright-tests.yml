@@ -17,17 +17,17 @@ jobs:
         # Definir la matriz con combinaciones de casos de prueba y navegadores
         include:
           - testcase: '1'
-            browser: 'chromium'
+            browser: 'webkit'
           - testcase: '2'
             browser: 'firefox'
           - testcase: '3'
-            browser: 'webkit'
-          - testcase: '4'
             browser: 'chromium'
+          - testcase: '4'
+            browser: 'webkit'
           - testcase: '5'
             browser: 'firefox'
           - testcase: '6'
-            browser: 'webkit'
+            browser: 'chromium'
     
     steps:
       - uses: actions/checkout@v4

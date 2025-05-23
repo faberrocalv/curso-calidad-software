@@ -17,7 +17,7 @@ export class PLPPage {
         this.emptyMiniCartMessage = this.page.locator('//p[@data-fs-no-items="true"]');
         this.acceptCookiesButton = this.page.getByRole('button', { name: 'Acepto' });
         this.goToPayButton = this.page.getByRole('button', { name: 'Ver carrito/ Ir a pagar' });
-        this.addToCartButton = this.page.locator('//article[contains(@class, "productCard_productCard")]//button[span[text()="Agregar"]]').nth(1);
+        this.addToCartButton = this.page.locator('//article[contains(@class, "productCard_productCard")]//button[span[text()="Agregar"]]').nth(2);
         this.deleteFromMiniCartButton = this.page.locator('//div[@data-fs-content-button="true"]//button[1]');
         this.miniCartAddOneMoreUnitButton = this.page.locator('//div[@data-fs-content-button="true"]//button[2]');
     }

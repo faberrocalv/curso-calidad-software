@@ -106,7 +106,7 @@ test.describe('Ejercicio práctico # 1', () => {
         test.slow(); // Mark the test as slow
         // Define test data
         const plpLink = 'https://www.exito.com/tecnologia/computadores';
-        const selectedProductName = 'Portatil HP  AMD Ryzen 7 7730U RAM 16 GB 1 TB SSD 15fc0030la'
+        const selectedProductName = 'Portatil ASUS Vivobook 16 Intel Core i5 12500H RAM 16 GB 1 TB SSD X1605ZAMB712W';
         const selectedProductQuantity = '2';
 
         // Navigate to PLP
@@ -159,7 +159,7 @@ test.describe('Ejercicio práctico # 1', () => {
         test.slow(); // Mark the test as slow
         // Define test data for two products
         const productLink_1 = 'https://www.exito.com/audifonos-inalambricos-jbl-tune-520bt-102786008-mp/p';
-        const productLink_2 = 'https://www.exito.com/ps5-grand-theft-auto-v-latam-playstation-sin-ref-3147704/p';
+        const productLink_2 = 'https://www.exito.com/juego-juego-fisico-ps5-ps5-ea-sports-fc-25-3186664/p';
         const additionalUnits = 1; // Number of additional units to add for each product
         const expectedTotalQuantity = additionalUnits + 1; // Expected total quantity for each product
 
